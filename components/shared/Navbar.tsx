@@ -6,6 +6,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ProfileDropdown from "./ProfileDropdown";
 import MobileMenu from "./MobileMenu";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import NewProject from "../projects/NewProject";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,11 +18,6 @@ export default function Navbar() {
   if (!session) {
     return null;
   }
-  const user = {
-    name: session?.user.name!,
-    email: session?.user.email,
-    image: session?.user.image,
-  };
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -86,12 +83,7 @@ export default function Navbar() {
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                   <ProfileDropdown user={session.user} />
 
-                  <a
-                    href="#"
-                    className="ml-6 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    New Project
-                  </a>
+                  <NewProject />
                 </div>
               </div>
             </div>
